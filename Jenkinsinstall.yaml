@@ -1,3 +1,4 @@
+#This Jenkins installation is for UBUNTU
 ---
 - hosts: My_Group
   tasks:
