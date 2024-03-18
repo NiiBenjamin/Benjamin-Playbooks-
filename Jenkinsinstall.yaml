@@ -1,0 +1,25 @@
+---
+- hosts: My_Group
+  tasks:
+    - name: Ensure the Jenkins apt repository key is installed
+      apt_key:
+        url: https://pkg.jenkins.io/debian-stable/jenkins.io.key
+        state: present
+      become: yes
+
+    - name: Ensure the repository is configured
+      apt_repository:
+        repo: 'deb https://pkg.jenkins.io/debian-stable binary/'
+        state: present
+      become: yes
+
+    - name: Ensure Jenkins is installed
+      apt:
+        name: jenkins
+        update_cache: yes
+      become: yes
+
+    - name: Ensure Jenkins is running
+      service:
+        name: jenkins
+        state: started
